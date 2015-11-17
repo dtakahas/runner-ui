@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="container" style="margin-bottom:40px">
+      <h1>{{.Filename}} <a href="/" class="btn btn-info">Start Over</a></h1>
+      <form action="/edit/" method="post" enctype="multipart/form-data">
+        <ul>
+          <div class="page-header" data-toggle="collapse" data-target="#settings">
+            <h2>Settings</h2>
+          </div>
+          <div id="settings" class="collapse in">
+            <li><strong class="col-md-4">Project GUID (UPID):</strong> <input type="text" name="projectGUID" value={{.Map.projectGUID}} /></li>
+            <li><strong class="col-md-4">Org ID:</strong> <input type="text" name="orgId" value={{.Map.orgId}} /></li>
+            <li><strong class="col-md-4">Project Slug ID:</strong> <input type="text" name="projectId" value={{.Map.projectId}} /></li>
+            <li><strong class="col-md-4">Environment:</strong> <input type="text" name="unityConnectEnvironnement" value={{.Map.unityConnectEnvironnement}} /></li>
+            <li><strong class="col-md-4">Unity Editor Path:</strong> <input type="text" name="unityEditorPath" value={{.Map.unityEditorPath}} /></li>
+            <li><strong class="col-md-4">Min Client Number:</strong> <input type="text" name="minimumClientNumber" value={{.Map.minimumClientNumber}} /></li>
+            <li><strong class="col-md-4">Host:</strong> <input type="text" name="host" value={{.Map.host}} /></li>
+            <li><strong class="col-md-4">Port:</strong> <input type="text" name="port" value={{.Map.port}} /></li>
+          </div>
+          {{ range $key, $value := .Map }}
+              {{if eq $key "clients"}}
+                <div class="page-header" data-toggle="collapse" data-target="#clients">
+                  <h2>Clients</h2>
+                </div>
+                <ul id="clients" class="collapse in">
+                {{ range $c_key, $c_val := $value }}
+                  <div>
+                    <li><strong class="client-number">{{ $c_key }}</strong>:</li>
+                    <li><a href="#" class="btn btn-danger btn-xs remove-command">X</a></li>
+                    <ul>
+                    {{ range $c_sub_key, $c_sub_val := $c_val }}
+                      <li><strong class="col-md-2">{{ $c_sub_key }}</strong> <input type="text" name="clients.{{$c_key}}.{{$c_sub_key}}" {{with $c_sub_val}}value="{{$c_sub_val}}" {{end}} /></li>
+                    {{ end }}
+                    </ul>
+                  </div>
+                {{ end }}
+                  <a href="#" class="btn btn-success add-button" id="add-client">Add Client</a>
+                </ul>
+              {{end}}
+              {{if eq $key "tests"}}
+                <div class="page-header" data-toggle="collapse" data-target="#tests">
+                  <h2>Tests</h2>
+                </div>
+                <ul id="tests" class="collapse in">
+                {{ range $t_key, $t_val := $value }}
+                  <div class="page-header" data-toggle="collapse" data-target="#tests-{{$t_key}}">
+                    <h3>Test: {{ $t_val.description }}</h3>
+                  </div>
+                  <ul id="tests-{{$t_key}}" test-num="{{$t_key}}" class="collapse in testfields">
+                  {{ range $t_sub_key, $t_sub_val := $t_val }}
+                    {{ if eq $t_sub_key "commands"}}
+                      <li><strong>Commands:</strong></li>
+                      <ul>
+                      {{ range $t_cmd_key, $t_cmd_val := $t_sub_val }}
+                        <div class="command-style">
+                          <li><strong tkey="{{$t_key}}" tcmd="{{$t_cmd_key}}" class="command-header">Cmd {{ $t_cmd_key }}</strong>: </li>
+                          <li><a href="#" class="btn btn-danger btn-xs remove-command">X</a></li>
+                          <ul>
+                          {{ range $t_sub_cmd_key, $t_sub_cmd_val := $t_cmd_val}}
+                            <li><strong class="col-md-2">{{ $t_sub_cmd_key }}</strong> <input type="text" name="tests.{{$t_key}}.commands.{{$t_cmd_key}}.{{$t_sub_cmd_key}}" value="{{$t_sub_cmd_val}}" /></li>
+                          {{ end }}
+                          </ul>
+                        <div>
+                      {{ end }}
+                      <a href="#" class="btn btn-info add-button add-command">Add Command</a>
+                      </ul>
+                    {{ else }}
+                      <li><strong class="col-md-2">{{ $t_sub_key }}:</strong> <input type="text" name="tests.{{$t_key}}.{{$t_sub_key}}" {{with $t_sub_val}}value="{{$t_sub_val}}" {{end}} /></li>
+                    {{ end }}
+                  {{ end }}
+                  </ul>
+                {{ end }}
+                <a href="#" class="btn btn-success add-button" id="add-test">Add Test</a>
+                </ul>
+              {{end}}
+          {{ end }}
+        </ul>
+        <div class="page-header" style="padding-top:40px" >
+          <strong class="col-md-2">New file name:</strong><input type="text" name="NewFileName" style="margin-right:10px" /><input type="submit" value="Save" class="btn btn-info" />
+        </div>
+      </form>
+    </div>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script>
+      $(document).ready( function() {
+        $('#add-client').click(function(event) {
+          var num = parseInt($('#clients .client-number').last().html()) + 1;
+          var copy = $('#clients div ul').last().clone();
+          $.each(copy.find('input'), function(){
+            $(this).prop("value", "");
+            var subkey = $(this).parent().find("strong").html();
+            $(this).prop("name", "clients." + num + "." + subkey );
+          });
+          $('#clients').append("<div></div>");
+          $('#clients div').last().append("<li><strong class=\"client-number\">" + num + "</strong>:</li><li><a href=\"#\" class=\"btn btn-danger btn-xs remove-command\">X</a></li>");
+          $('#clients div').last().append(copy);
+          var button = $('#add-client').clone();
+          $('#add-client').remove();
+          $('#clients').append(button);
+          $('.remove-command').click(function(event) {
+            $(this).parent().parent().remove();
+            return false;
+          });
+          return false;
+        });
+
+        $('.add-command').click(function(event) {
+          var button = $(this).clone();
+          var commands = $(this).parent().parent();
+          var copy = commands.find('ul').last().clone();
+          var commandHeader = commands.find(".command-header").last();
+          var key = parseInt(commandHeader.attr("tkey")) + 1;
+          var cmdKey = parseInt(commandHeader.attr("tcmd")) + 1;
+          $.each(copy.find('input'), function(){
+            $(this).prop("value", "");
+            var subCmdKey = $(this).parent().find("strong").html();
+            $(this).prop("name", "tests." + key + ".commands." + cmdKey + "." + subCmdKey);
+          });
+          commands.append("<div class=\"new\"></div>");
+          commands.find(".new").last().append("<li><strong>Cmd " + cmdKey + "</strong>:</li><li><a href=\"#\" class=\"btn btn-danger btn-xs remove-command\">X</a></li>");
+          commands.find(".new").last().append(copy);
+          $(this).remove();
+          commands.append(button);
+          $('.remove-command').click(function(event) {
+            $(this).parent().parent().remove();
+            return false;
+          });
+          return false;
+        });
+
+        $('#add-test').click(function(event) {
+          var copy = $('#tests ul.testfields').last().clone();
+          var newTestNum = parseInt(copy.attr("test-num")) + 1;
+          $.each(copy.find('input'), function(){
+            $(this).prop("value", "");
+            var oldName = $(this).prop("name");
+            var arr = oldName.split(".");
+            arr[1] = newTestNum;
+            var newName = arr.join(".");
+            $(this).prop("name", newName);
+          });
+          $('#tests').append("<div class=\"page-header\" data-toggle=\"collapse\"><h3>Test: New Test</h3></div>");
+          $('#tests').append(copy);
+          var button = $('#add-test').clone();
+          $('#add-test').remove();
+          $('#tests').append(button);
+          $('.remove-command').click(function(event) {
+            $(this).parent().parent().remove();
+            return false;
+          });
+          return false;
+        });
+
+        $('.remove-command').click(function(event) {
+          $(this).parent().parent().remove();
+          return false;
+        });
+      });
+    </script>
+
+    <style>
+      ul {
+        list-style-type: none;
+      }
+      input {
+        width: 30%;
+      }
+      .add-button {
+        float: right;
+      }
+      .command-style {
+        padding-bottom: 10px;
+      }
+    </style>
+  </body>
+</html>

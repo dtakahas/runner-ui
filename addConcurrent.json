@@ -1,0 +1,287 @@
+{
+    "projectGUID": "D357C90A-F15D-48A0-8C9B-DA5642FB92CA",
+    "orgId": "testrunner",
+    "projectId": "testrunnerproject",
+    "unityConnectEnvironnement": "andy",
+    "unityEditorPath": "/Users/davetakahashi/unity/build/MacEditor/Unity.app/Contents/MacOS/Unity",
+    "minimumClientNumber": 6,
+    "host": "127.0.0.1",
+    "port": 6969,
+    "clients": [
+        {
+            "email": "andyk+collabtest@unity3d.com",
+            "localProjectFolder": "/Users/davetakahashi/Unity5Project2",
+            "readyToJob": false,
+            "socket": "",
+            "userId": "100",
+            "userName": "andykcollabtest",
+            "userPassword": "Cheese1234"
+        },
+        {
+            "email": "andyk+collabtest2@unity3d.com",
+            "localProjectFolder": "/Users/davetakahashi/Unity5Project3",
+            "readyToJob": false,
+            "socket": "",
+            "userId": "101",
+            "userName": "collabtest2",
+            "userPassword": "Cheese1234"
+        },
+        {
+            "email": "andyk+collabtest3@unity3d.com",
+            "localProjectFolder": "/Users/davetakahashi/Unity5Project4",
+            "readyToJob": false,
+            "socket": "",
+            "userId": "102",
+            "userName": "collabtest3",
+            "userPassword": "Cheese1234"
+        },
+        {
+            "email": "andyk+collabtest4@unity3d.com",
+            "localProjectFolder": "/Users/davetakahashi/Unity5Project6",
+            "readyToJob": false,
+            "socket": "",
+            "userId": "103",
+            "userName": "collabtest4",
+            "userPassword": "Cheese1234"
+        },
+        {
+            "email": "andyk+collabtest5@unity3d.com",
+            "localProjectFolder": "/Users/davetakahashi/Unity5Project7",
+            "readyToJob": false,
+            "socket": "",
+            "userId": "104",
+            "userName": "collabtest5",
+            "userPassword": "Cheese1234"
+        },
+        {
+            "email": "andyk+collabtest6@unity3d.com",
+            "localProjectFolder": "/Users/davetakahashi/Unity5Project8",
+            "readyToJob": false,
+            "socket": "",
+            "userId": "105",
+            "userName": "collabtest6",
+            "userPassword": "Cheese1234"
+        }
+    ],
+    "tests": [
+        {
+            "commands": [
+                {
+                    "cmdId": 0,
+                    "addFile": "",
+                    "clientId": "100",
+                    "cmd": "commit",
+                    "completed": false,
+                    "description": "Initial commit",
+                    "executionOrder": "block",
+                    "initialized": false,
+                    "action": "",
+                    "comment": "Initial Commit from master client"
+                },
+                {
+                    "cmdId": 1,
+                    "addFile": "",
+                    "clientId": "101",
+                    "cmd": "update",
+                    "completed": false,
+                    "description": "Update after initial commit",
+                    "executionOrder": "noblock",
+                    "initialized": false,
+                    "action": "their",
+                    "comment": ""
+                },
+                {
+                    "cmdId": 2,
+                    "addFile": "",
+                    "clientId": "102",
+                    "cmd": "update",
+                    "completed": false,
+                    "description": "Update after initial commit",
+                    "executionOrder": "noblock",
+                    "initialized": false,
+                    "action": "their",
+                    "comment": ""
+                },
+                {
+                    "cmdId": 3,
+                    "addFile": "",
+                    "clientId": "103",
+                    "cmd": "update",
+                    "completed": false,
+                    "description": "Update after initial commit",
+                    "executionOrder": "noblock",
+                    "initialized": false,
+                    "action": "their",
+                    "comment": ""
+                },
+                {
+                    "cmdId": 4,
+                    "addFile": "",
+                    "clientId": "104",
+                    "cmd": "update",
+                    "completed": false,
+                    "description": "Update after initial commit",
+                    "executionOrder": "noblock",
+                    "initialized": false,
+                    "action": "their",
+                    "comment": ""
+                },
+                {
+                    "cmdId": 5,
+                    "addFile": "",
+                    "clientId": "105",
+                    "cmd": "update",
+                    "completed": false,
+                    "description": "Update after initial commit",
+                    "executionOrder": "block",
+                    "initialized": false,
+                    "action": "their",
+                    "comment": ""
+                }
+            ],
+            "currentCmd": "",
+            "currentStep": 0,
+            "description": "Initial commit test",
+            "requiredClientNumber": 6,
+            "testId": 0
+        },
+        {
+            "commands": [
+                {
+                    "cmdId": 0,
+                    "addFile": "Assets/?.txt",
+                    "clientId": "100",
+                    "cmd": "refresh",
+                    "completed": false,
+                    "description": "Add a big file in the folder and call a refresh",
+                    "executionOrder": "block",
+                    "initialized": false,
+                    "action": "",
+                    "comment": ""
+                },
+                {
+                    "cmdId": 1,
+                    "addFile": "",
+                    "clientId": "100",
+                    "cmd": "commit",
+                    "completed": false,
+                    "description": "Commit the big file",
+                    "executionOrder": "block",
+                    "initialized": false,
+                    "action": "",
+                    "comment": "Add a big random file"
+                },
+                {
+                    "cmdId": 2,
+                    "addFile": "",
+                    "clientId": "101",
+                    "cmd": "update",
+                    "completed": false,
+                    "description": "Update after the commit",
+                    "executionOrder": "noblock",
+                    "initialized": false,
+                    "action": "their",
+                    "comment": ""
+                },
+                {
+                    "cmdId": 3,
+                    "addFile": "",
+                    "clientId": "102",
+                    "cmd": "update",
+                    "completed": false,
+                    "description": "Update after the commit",
+                    "executionOrder": "noblock",
+                    "initialized": false,
+                    "action": "their",
+                    "comment": ""
+                },
+                {
+                    "cmdId": 4,
+                    "addFile": "",
+                    "clientId": "103",
+                    "cmd": "update",
+                    "completed": false,
+                    "description": "Update after the commit",
+                    "executionOrder": "noblock",
+                    "initialized": false,
+                    "action": "their",
+                    "comment": ""
+                },
+                {
+                    "cmdId": 5,
+                    "addFile": "",
+                    "clientId": "104",
+                    "cmd": "update",
+                    "completed": false,
+                    "description": "Update after the commit",
+                    "executionOrder": "block",
+                    "initialized": false,
+                    "action": "their",
+                    "comment": ""
+                },
+                {
+                    "cmdId": 6,
+                    "addFile": "",
+                    "clientId": "105",
+                    "cmd": "update",
+                    "completed": false,
+                    "description": "Update after the commit",
+                    "executionOrder": "block",
+                    "initialized": false,
+                    "action": "their",
+                    "comment": ""
+                }
+            ],
+            "currentCmd": "",
+            "currentStep": 0,
+            "description": "commit one big file",
+            "requiredClientNumber": 6,
+            "testId": 1
+        },
+        {
+            "commands": [
+                {
+                    "cmdId": 0,
+                    "addFile": "",
+                    "clientId": "100",
+                    "cmd": "commit",
+                    "completed": false,
+                    "description": "Initial commit",
+                    "executionOrder": "block",
+                    "initialized": false,
+                    "action": "",
+                    "comment": "Initial commit from master client"
+                },
+                {
+                    "cmdId": 1,
+                    "addFile": "Assets/?.txt",
+                    "clientId": "101",
+                    "cmd": "commit",
+                    "completed": false,
+                    "description": "Commit from client 101",
+                    "executionOrder": "noblock",
+                    "initialized": false,
+                    "action": "",
+                    "comment": "Commit from client 101"
+                },
+                {
+                    "cmdId": 2,
+                    "addFile": "Assets/?.txt",
+                    "clientId": "102",
+                    "cmd": "commit",
+                    "completed": false,
+                    "description": "Commit from client 102",
+                    "executionOrder": "noblock",
+                    "initialized": false,
+                    "action": "",
+                    "comment": "Commit from client 102"
+                }
+            ],
+            "currentCmd": "",
+            "currentStep": 0,
+            "description": "Concurrent commit",
+            "requiredClientNumber": 6,
+            "testId": 2
+        }
+    ]
+}
